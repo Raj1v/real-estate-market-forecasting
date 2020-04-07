@@ -1,5 +1,6 @@
 import csv
 import articles as art
+import pandas as pd
 
 LM_NEGATIVE_WORDS, LM_POSITIVE_WORDS = [], []
 
@@ -60,4 +61,8 @@ def timespan_sentiment(articles, start_year, end_year):
             positive_scores.append(month_sentiment_pos)
             negative_scores.append(month_sentiment_neg)
 
-    return positive_scores, negative_scores
+    dates = pd.period_range(start="%d-1" % start_year, end="%d-12" % end_year, freq='M')
+    sentiment_scores = list(zip(positive_scores, negative_scores))
+    dataframe = pd.DataFrame(sentiment_scores, index=dates, columns=['Positive Scores', 'Negative Scores'])
+
+    return dataframe
