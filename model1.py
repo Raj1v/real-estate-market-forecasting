@@ -31,7 +31,7 @@ def tokens_sentiment(tokens):
     return positivity, negativity
 
 
-def articles_sentiment(articles):
+def articles_sentiment(articles, only_headline=False):
     """Returns the positive and negative sentiment scores for a set of articles"""
 
     if len(articles) == 0:
@@ -39,7 +39,11 @@ def articles_sentiment(articles):
 
     positivity, negativity = 0, 0
     for article in articles:
-        headline_positivity, headline_negativity = tokens_sentiment(article.body_tokenized())
+        if only_headline:
+            tokens = article.headline_tokenized()
+        else:
+            tokens = article.body_tokenized()
+        headline_positivity, headline_negativity = tokens_sentiment(tokens)
         positivity += headline_positivity
         negativity += headline_negativity
 
@@ -49,14 +53,14 @@ def articles_sentiment(articles):
     return positivity, negativity
 
 
-def timespan_sentiment(articles, start_year, end_year):
+def timespan_sentiment(articles, start_year, end_year, only_headlines=False):
     """Returns the sentiment scores of a specific timespan within a set of articles"""
     positive_scores, negative_scores = [], []
 
     for year in range(start_year, end_year + 1):
         for month in range(1, 13):
             month_articles = art.months_articles(articles, month, year)
-            month_sentiment_pos, month_sentiment_neg = articles_sentiment(month_articles)
+            month_sentiment_pos, month_sentiment_neg = articles_sentiment(month_articles, only_headline=only_headlines)
 
             positive_scores.append(month_sentiment_pos)
             negative_scores.append(month_sentiment_neg)
