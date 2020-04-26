@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import nltk
 import csv
 import sys
+import os
+import pickle
 
 csv.field_size_limit(sys.maxsize)
 
@@ -57,6 +59,22 @@ def load_articles_guardian(path="data/articles_guardian.csv"):
             year, month = date.split('-')[0:2]
             article = Article(headline, body, month, year, source="guardian")
             articles.append(article)
+    return articles
+
+
+def load_articles(use_cache=True):
+    pickle_path = "pickles/articles"
+    if os.path.exists(pickle_path) and use_cache:
+        infile = open(pickle_path, 'rb')
+        articles = pickle.load(infile)
+        infile.close()
+    else:
+        articles_ft = load_articles_ft()
+        articles_guardian = load_articles_guardian()
+        articles = articles_ft + articles_guardian
+        outfile = open(pickle_path, 'wb')
+        pickle.dump(articles, outfile)
+        outfile.close()
     return articles
 
 
