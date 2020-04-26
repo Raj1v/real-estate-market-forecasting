@@ -12,6 +12,7 @@ from statsmodels.tools.eval_measures import rmse, aic
 class VectorAutoRegressor:
     def __init__(self, housing_index, sentiment_index, housing_column, date_format=None):
         # Import housing & sentiment data
+
         self.housing_column = housing_column
         self.housing_data = pd.read_csv(housing_index, parse_dates=['Period'], index_col='Period',
                                         usecols=['Period', self.housing_column], thousands=',')
@@ -35,6 +36,7 @@ class VectorAutoRegressor:
 
         # Construct model
         self.model = VAR(self.training_data)
+        self.fit = self.model.fit(maxlags=4, ic='aic')
 
     def grangers_causation_matrix(self, test='ssr_chi2test', verbose=False, maxlag=12):
         """Check Granger Causality of all possible combinations of the Time series.
@@ -94,9 +96,8 @@ class VectorAutoRegressor:
                 return self.make_stationary(differenced_data)
         return data
 
-    def fit_model(self, lag_order):
+    def fit_model(self):
         """Fits the model to to a specified lag order"""
-        self.fit = self.model.fit(lag_order)
         return self.fit
 
     def forecast_period(self, period, plot=True, ):
