@@ -24,11 +24,17 @@ class VectorAutoRegressor:
 
         self.sentiment_data = sentiment_index
 
-        # Merge and process data
-        self.data = pd.merge(self.housing_data, self.sentiment_data, left_index=True, right_index=True)
+        # Merge and process data. But only merge data if sentiment index will be used
+        if self.sentiment_data is None:
+            self.data = self.housing_data
+        else:
+            self.data = pd.merge(self.housing_data, self.sentiment_data, left_index=True, right_index=True)
+
         self.data = self.data.dropna()
         self.n_differenced = 0  # n_differenced keeps track of how many times the series got differenced
+
         self.data_stationary = self.make_stationary(self.data)
+        #self.data_stationary = self.data
 
         # Split data
         n_test = round(len(self.data) * 0.2)
