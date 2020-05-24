@@ -1,5 +1,6 @@
 import pandas as pd
 import os.path
+import csv
 
 
 def import_nonfarm_data():
@@ -44,7 +45,6 @@ def import_nonfarm_data():
                 labels.append(label)
                 confidences.append(confidence)
 
-
         with open(sentences_path) as sentences:
             for sentence in sentences:
                 contents.append(sentence)
@@ -52,3 +52,18 @@ def import_nonfarm_data():
     data = pd.DataFrame({'Sentence': contents, 'Label': labels, 'Confidence': confidences})
     data['Confidence'] = pd.to_numeric(data['Confidence'])
     return data
+
+
+def import_lm_dictionary():
+    """Imports the positive and negative wordlists from the Loughran-McDonald sentiment lexicon"""
+    with open('data/lm-sentiment-wordlist/lm_negative.csv') as f:
+        reader = csv.reader(f)
+        next(reader)
+        LM_NEGATIVE_WORDS = [word[0] for word in list(reader)]
+
+    with open('data/lm-sentiment-wordlist/lm_positive.csv') as f:
+        reader = csv.reader(f)
+        next(reader)
+        LM_POSITIVE_WORDS = [word[0] for word in list(reader)]
+
+    return LM_POSITIVE_WORDS, LM_NEGATIVE_WORDS
