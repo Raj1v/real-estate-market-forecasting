@@ -13,7 +13,7 @@ class Model2(Model):
 
     def article_sentiment(self, article):
         positive, negative, neutral = False, False, False
-        classifcation = classify_article(article)
+        classifcation = self.classify_article(article)
         if classifcation == '1':
             positive = True
         elif classifcation == '-1':
