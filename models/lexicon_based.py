@@ -1,11 +1,11 @@
 import csv
 import data_importer
-from model import Model
+from models.model_base import ModelBase
 
 LM_POSITIVE_WORDS, LM_NEGATIVE_WORDS = data_importer.import_lm_dictionary()
 
 
-class Model1(Model):
+class Model(ModelBase):
     def article_sentiment(self, article):
         """Returns the positive and negative sentiment scores of a list of tokens as a tuple"""
         tokens = article.body_tokenized()

@@ -1,9 +1,7 @@
-import pandas as pd
-import articles as art
-from model import Model
+from models.model_base import ModelBase
 
 
-class Model2(Model):
+class Model(ModelBase):
 
     def classify_article(self, article):
         """Classifies an article using SVM"""

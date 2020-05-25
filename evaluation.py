@@ -1,5 +1,5 @@
 from vector_auto_regression import VectorAutoRegressor
-from model1 import Model1
+from models.model1 import Model1
 import articles as art
 import numpy as np
 import scipy

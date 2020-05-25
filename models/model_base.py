@@ -3,7 +3,7 @@ import pandas as pd
 import articles as art
 
 
-class Model(ABC):
+class ModelBase(ABC):
     def __init__(self, articles):
         self.articles = articles
         pass
