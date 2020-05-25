@@ -43,6 +43,7 @@ The most straightforward way to run and evaluate models is through executing the
 
 Alternatively, the code belows shows how a Python file can evaluate models.
 
+```python
     import articles as art
     from evaluation import Evaluator
     import models.lexicon_based
@@ -56,6 +57,7 @@ Alternatively, the code belows shows how a Python file can evaluate models.
     # Evaluate the model on a given real estate index
     real_estate_index = 'data/real_estate_data/direct/england.csv'
     ev = Evaluator(model, articles, real_estate_index)
+```
 This code will run the lexicon-based sentiment model on the direct real estate market and output its results and performance metrics, such as the regression coefficients with confidence intervals, plots of its forecast results and its MAPE.
 
 For more detailed information and an example of running the slightly more complex machine learning model, see the `Evaluation` notebook.
@@ -63,27 +65,29 @@ For more detailed information and an example of running the slightly more comple
 ## Creating new models
 It is easy to implement and analyze new sentiment models by inhereting from the base model class and implementing the `article_sentiment` method. The code below implements a simple new sentiment model.
 
-    from models.model_base import ModelBase
+```python
+from models.model_base import ModelBase
 
-    class Model(ModelBase):
-        """
-        Ultra-simple lexicon-based sentiment model
-        """
-        def article_sentiment(self, article):
-            """Returns the positive and negative sentiment scores of a list of tokens as a tuple"""
+class Model(ModelBase):
+    """
+    Ultra-simple lexicon-based sentiment model
+    """
+    def article_sentiment(self, article):
+        """Returns the positive and negative sentiment scores of a list of tokens as a tuple"""
 
-            # Use the functions available through Article class
-            tokens = article.body_tokenized()
+        # Use the functions available through Article class
+        tokens = article.body_tokenized()
 
-            positivity, negativity, neutrality = 0,0,0
-            if 'happy' in tokens:
-                positivity = 1
-            elif 'sad' in tokens:
-                negativity = 1
-            else:
-                neutrality = 1
+        positivity, negativity, neutrality = 0,0,0
+        if 'happy' in tokens:
+            positivity = 1
+        elif 'sad' in tokens:
+            negativity = 1
+        else:
+            neutrality = 1
 
-            return positivity, negativity, neutrality
+        return positivity, negativity, neutrality
+```
 
 If desired, `__init__` can be overwritten to add more parameters to a model, however, each `__init__` must set the `self.articles` attribute.
 
