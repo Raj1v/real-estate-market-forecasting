@@ -113,5 +113,5 @@ See the `README.MD` files within the `models`, `notebooks` and `pickles` folder 
 
 # License
 This work is licenced under the MIT Licence. 
-# Credits
+
 
