@@ -1,6 +1,4 @@
 from vector_auto_regression import VectorAutoRegressor
-from models.model1 import Model1
-import articles as art
 import numpy as np
 import scipy
 from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score
