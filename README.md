@@ -97,9 +97,6 @@ The Jupyter notebooks in the `notebooks` guide you through the following other t
 + Working with sentiment data from an external model (in the example: Consumer Confidence)
 + Establishing a simple baseline autoregressive model on real estate indices
 
-# Furter customization
-Below are some quick tips on getting started with further customizing the framework
-
 # File structure
     .
     ├── data                        # Data used by models (e.g.: news articles, sentiment lexicons, real estate data)
