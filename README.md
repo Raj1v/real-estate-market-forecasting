@@ -35,7 +35,7 @@ The first thing to do before using this tool is to provide some data. For the or
     + Securitized real estate market (FTSE EPRA NAREIT UK)
 
 The paper associated with this project provides more detail on the used dataset.
-To get started, it is highly advisable to run and test this project with the same data, which can be downloaded here.
+To get started, it is highly advisable to run and test this project with the same data, which can be downloaded [here](https://drive.google.com/file/d/1UysbkU5v8Nh1Uhc8bYBeIgDJaZFHoRFe/view?usp=sharing).
 The entire zipfile should be extracted in the `data` folder
 
 ## Running and evaluating models
