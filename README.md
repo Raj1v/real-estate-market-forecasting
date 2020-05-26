@@ -113,7 +113,7 @@ The Jupyter notebooks in the `notebooks` guide you through the following other t
     ├── latex_tables.py             # Printing resutls of model evaluation as a latex table
     └── vector_auto_regression.py   # Implementation of vector autoregression on sentiment models
 
-See the `README.MD` files within the `models`, `notebooks` and `pickles` folder for a rundown of their individual files.
+See the `README.MD` files within the `notebooks` and `pickles` folder for a rundown of their individual files.
 
 # License
 This work is licenced under the MIT Licence. 
